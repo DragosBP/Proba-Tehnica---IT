@@ -2,23 +2,38 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const database = require("./database/database");
+const path = require('path')
+const {check, validationResult} = require('express-validator')
 
 
 const app = express();
 
-app.use(bodyParser.json())
+//De modificat
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../frontend/views'));
 
+app.use(bodyParser.json())
+app.use(cors())
+
+
+//Probabil trebuie sters
 app.get('/', function(req, res){
-    res.redirect('/register');
+    res.render('main'); //De modificat
 });
 
 
+//Probabil trebuie sters
 app.get('/register', (req, res) => {
-    res.render("../frontend/register/register.ejs")
+    res.render('register') //De modificat
 })
 
-app.post('/register', (req, res) => {
+//Trebuie readaugata logica de check cu express-validator (cu custom pt parola) si sa vezi cum sa iei un res in react
+app.post('/register',  (req, res) => {
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()})
+        }
         let email = req.body.email
         let password = req.body.password
         database.saveUser(email, password)
