@@ -14,6 +14,10 @@ const pollSchema = new Mongoose.Schema({
             type: Number,
             default: 0
         }
+    }],
+    usersThatVoted: [ {
+        type: Mongoose.SchemaTypes.ObjectId,
+        ref: "User"
     }]
 });
 

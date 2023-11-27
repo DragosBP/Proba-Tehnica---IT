@@ -2,6 +2,7 @@ const Mongoose = require("mongoose");
 const User = require("./user.js");
 const Poll = require("./poll.js");
 const { error } = require("console");
+const user = require("./user.js");
 
 Mongoose.connect("mongodb://localhost/database").then(console.log("Database started succesfully"));
 
@@ -25,16 +26,15 @@ async function saveUser(userEmail, userPassword) {
         })
 }
 
-async function findUser(userEmail, userPassword) {
+async function findUserByEmail(userEmail) {
     return User.findOne({
-        email: userEmail,
-        password: userPassword
+        email: userEmail
     })
         .then((user) => {
             if (user != null) {
                 console.log("User found by email: ", user)
             } else {
-                console.log("User not found")
+                console.log("User not found by email")
             }
             return user
         })
@@ -48,4 +48,4 @@ async function addPoll(pollId, userId) {
 
 }
 
-module.exports = {saveUser, findUser}
+module.exports = {saveUser, findUserByEmail}
