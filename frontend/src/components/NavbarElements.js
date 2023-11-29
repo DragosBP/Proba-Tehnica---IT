@@ -22,7 +22,12 @@ export const NavLink = styled(Link)`
     &.active {
         color: #4d4dff;
     }
-`;
+    `;
+
+export const NavButton = styled.button`
+    display: flex
+    align-items: center
+`
  
 export const Bars = styled(FaBars)`
     display: none;
@@ -51,3 +56,4 @@ white-space: nowrap; */
         display: none;
     }
 `;
+

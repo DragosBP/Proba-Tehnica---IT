@@ -1,12 +1,15 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+
+//TODO Update the site to 
 
 const Login = () => {
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [errorMessage, setErrorMessage] = useState()
 
     const handleSubmit = async (event) => {
-        event.prevenDefault()
+        event.preventDefault()
         await fetch("http://localhost:5000/login", {
             method: 'post',
             headers: {
@@ -15,16 +18,17 @@ const Login = () => {
             body: JSON.stringify({
                 email: email,
                 password: password,
+                token: localStorage.getItem('token')
             })
         })
         .then((response) => response.text())
         .then((data) => {
-            console.log(data)
             const errMessage = JSON.stringify(data).includes("email")
             if (errMessage) {
                 setErrorMessage(data)
             } else {
-                setErrorMessage()
+                localStorage.setItem('token', data)
+                setErrorMessage("Looged in with succes")
             }
         })
     }
@@ -39,6 +43,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
             />
             <br></br>
+            <br></br>
             <label htmlFor='password'>Password</label>
             <input
                 type="password"
@@ -46,6 +51,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <br></br>
             <br></br>
             <div>{errorMessage}</div>
             <button type="submit">Login</button>

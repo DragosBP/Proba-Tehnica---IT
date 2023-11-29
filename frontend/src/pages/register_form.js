@@ -7,7 +7,6 @@ const Register = () => {
     const [emailMessage, setEmailMessage] = useState()
     const [passwordMessage, setPasswordMessage] = useState()
     const [succesMessage, setSuccescMessage] = useState()
-    const [nothing, setNothing] = useState()
 
     const handleSubmit = async (event) => {
         event.preventDefault()

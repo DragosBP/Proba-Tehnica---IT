@@ -5,11 +5,11 @@ const database = require("./database/database");
 const path = require('path')
 const {check, validationResult} = require('express-validator')
 const bcrypt = require("bcrypt")
-
+const jwt = require("jsonwebtoken")
 
 const app = express();
 
-//De modificat
+//De modificat, probabil sters
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../frontend/views'));
 
@@ -17,16 +17,23 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-//Probabil trebuie sters
-// app.get('/', function(req, res){
-//     res.render('main'); //De modificat
-// });
+function authentificateToken(req, res, next) {
+    const token = req.headers['authorization']
+    if (token == null) res.status(401).send("NO LOGGED IN because NO TOKEN") // Pot modifica mai tarziu mesaju
+    jwt.verify(token, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", (err, userId) => {
+        if (err) return res.status(402).send("NO LOGGED IN because TOKEN DEAD") // Post modifica mai tarziu mesajul
+        req.userId = userId
+        next()
+    })
+}
 
 
-//Probabil trebuie sters
-// app.get('/register', (req, res) => {
-//     res.render('register') //De modificat
-// })
+app.get('/polls', authentificateToken, (req, res) => {
+    console.log(req.userId)
+    res.status(200).send("USER LOGGED IN")
+})
+
+
 
 //Verifica emailul si parola dava sunt valide, daca nu sunt, trimtie un (400), altfel creeaza noul user
 app.post('/register', [
@@ -66,28 +73,44 @@ app.post('/register', [
         res.status(500).send("Error saving user: " + error.message)
     }
 })
-    
-app.post('/login', async (req, res) => {
+
+//
+app.post('/login', [
+    check('email')
+    .custom(async (value, {req}) => {
+        const user = await database.findUserByEmail(value)
+        if (user == null)
+            throw new Error("CEVA")
+        if (req.body.password == null)
+            throw new Error("CEVA")
+        bcrypt.compare(req.body.password, user.password)
+        .then((isMatch) => {
+            if (!isMatch)
+                throw new Error("The email addres or password you entter is invalid")
+        })
+    })
+    .withMessage("The email address or password you entter is invalid")
+],async (req, res) => {
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(200).send(errors.array()[0].msg) //TODO Cauta statusul exact
+        }
         database.findUserByEmail(req.body.email)
             .then((user) => {
-                if (user == null) {
-                    return res.status(200).send("The email addres or password you entter is invalid") //TODO: Vezi exact ce status ar trebui trimis aici
-                } else {
-                    bcrypt.compare(req.body.password, user.password)
-                    .then((isMatch) => {
-                        if (!isMatch)
-                            return res.status(200).send("The email addres or password you entter is invalid") //TODO: Vezi exact ce status ar trebui trimis aici
-                        else {
-                            //TODO Adauga logica de Session
-                            return res.status(200).send("EMAIL GOOD")
-                        }
-                    })
-                }
+                const userId = {userId: user._id}
+                const token = jwt.sign(userId, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", {expiresIn: '1m'})
+                res.status(200).send(token)
+                
             })
     } catch (error) {
         res.status(500).send("Error finding user: " + error.message)
     }
+})
+
+//
+app.post('/logout', (req, res) => {
+    res.status(200).send("TEST LOGOUT")
 })
 
 app.listen(5000, () => {

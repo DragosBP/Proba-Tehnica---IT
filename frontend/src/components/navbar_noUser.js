@@ -1,13 +1,16 @@
 import React from "react";
 import { Nav, NavLink, NavMenu } from "./NavbarElements";
  
-const Navbar = () => {
+const NavbarNoUser = () => {
     return (
         <>
             <Nav>
                 <NavMenu>
-                    <NavLink to="/register_form" activeStyle>
+                    <NavLink to="/register_form">
                         Register
+                    </NavLink>
+                    <NavLink to="/login_form">
+                        Login
                     </NavLink>
                 </NavMenu>
             </Nav>
@@ -15,4 +18,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavbarNoUser

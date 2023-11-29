@@ -1,6 +1,7 @@
 const Mongoose = require("mongoose");
 const User = require("./user.js");
 const Poll = require("./poll.js");
+const Session = require("./session_id.js")
 const { error } = require("console");
 const user = require("./user.js");
 
@@ -44,8 +45,15 @@ async function findUserByEmail(userEmail) {
         })
 }
 
+async function saveSession(sessionId, userId) {
+    Session.create({
+        sessionId: sessionId,
+        userId: userId
+    })
+}
+
 async function addPoll(pollId, userId) {
 
 }
 
-module.exports = {saveUser, findUserByEmail}
+module.exports = {saveUser, findUserByEmail, saveSession}
