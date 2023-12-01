@@ -1,8 +1,23 @@
-import React, {useEffect, useState} from 'react'
-
-//TODO Update the site to 
+import React, {useState, useEffect} from 'react'
+import Popup from 'reactjs-popup';
 
 const Login = () => {
+
+    const [blurr, setBlurr] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        blurr ? 
+            document.getElementById('main').style.filter = 'blur(5px)'
+            : 
+            document.getElementById('main').style.filter = 'blur(0px)'
+    }, [blurr])
+    
+    const handleBlurr = () => {
+        setBlurr(!blurr)
+        setOpen(!open)
+    }
+
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -29,33 +44,47 @@ const Login = () => {
             } else {
                 localStorage.setItem('token', data)
                 setErrorMessage("Looged in with succes")
+                window.location.reload(false)
             }
         })
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor='email'>Email</label>
-            <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <label htmlFor='password'>Password</label>
-            <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <div>{errorMessage}</div>
-            <button type="submit">Login</button>
-        </form>
+        <>
+        <Popup 
+            trigger={
+                <button>
+                    Login
+                </button>}
+            onOpen={handleBlurr}
+            onClose={handleBlurr}
+            modal
+            nested
+        >
+            <h1 >Login</h1>
+            <form>
+                <label htmlFor='email'></label>
+                <input
+                    type="text"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className='popup-input'
+                    placeholder='Email'
+                />
+                <label htmlFor='password'></label>
+                <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder='Password'
+                />
+                <div className='popup-message'>{errorMessage}</div>
+                <button type="submit" onClick={handleSubmit}>Login</button>
+            </form>
+        </Popup>
+        </>
     )
 }
 

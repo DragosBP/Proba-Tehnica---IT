@@ -9,9 +9,7 @@ const jwt = require("jsonwebtoken")
 
 const app = express();
 
-//De modificat, probabil sters
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../frontend/views'));
+//TODO Adauga mai multa logica de verificare a userului, in caz ca a stat de ceva timp pe site
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -29,8 +27,8 @@ function authentificateToken(req, res, next) {
 
 
 app.get('/polls', authentificateToken, (req, res) => {
-    console.log(req.userId)
-    res.status(200).send("USER LOGGED IN")
+    // console.log(req.userId)
+    res.status(200).send("USER IS LOGGED IN")
 })
 
 
@@ -99,7 +97,7 @@ app.post('/login', [
         database.findUserByEmail(req.body.email)
             .then((user) => {
                 const userId = {userId: user._id}
-                const token = jwt.sign(userId, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", {expiresIn: '1m'})
+                const token = jwt.sign(userId, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", {expiresIn: '60m'})
                 res.status(200).send(token)
                 
             })
@@ -110,7 +108,16 @@ app.post('/login', [
 
 //
 app.post('/logout', (req, res) => {
-    res.status(200).send("TEST LOGOUT")
+    res.status(200).send("USE LOGGED OUT")
+})
+
+app.post('/polls/create', authentificateToken, (req, res) => {
+    try {
+        console.log(req.body)
+        res.status(200)
+    } catch (error) {
+        res.status(500).send("Error finding user: " + error.message)
+    }
 })
 
 app.listen(5000, () => {

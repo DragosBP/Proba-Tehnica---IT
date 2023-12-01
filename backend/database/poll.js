@@ -5,8 +5,8 @@ const pollSchema = new Mongoose.Schema({
         type: Mongoose.SchemaTypes.ObjectId,
         ref: "User"
     },
-    opinion: String,
-    type: String,
+    title: String,
+    isMultiple: Boolean,
     numberOfAnswers: Number,
     answers: [ {
         name: String,
@@ -17,7 +17,8 @@ const pollSchema = new Mongoose.Schema({
     }],
     usersThatVoted: [ {
         type: Mongoose.SchemaTypes.ObjectId,
-        ref: "User"
+        ref: "User",
+        answers: [Number]
     }]
 });
 

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Logout = () => {
+
+    // const [message, setMessage] = useState()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -9,13 +11,17 @@ const Logout = () => {
         })
         .then((respone) => {
             localStorage.removeItem('token')
+            // setMessage("Logged out succsfully")
+            window.location.reload(false)
         })
     }
 
     return (
-        <button onSubmit={handleSubmit} type="submit">
-            Logout
-        </button>
+        <>
+            <button onClick={handleSubmit}>
+                Logout
+            </button>
+        </>
     )
 }
 

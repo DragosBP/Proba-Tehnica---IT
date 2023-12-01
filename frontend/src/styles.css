@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #04395E;
+}
+
+.blur-background {
+    filter: blur(5px);
+  }
+
+.navbar {
+    background-color: #FFF;
+    box-shadow: 0px 1px 14px 0px #021B2C;    
+    color: #04395E;
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a{
+    color: inherit;
+}
+
+.navbar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem
+}
+
+.navbar li button {
+    font-family: 'Inter', sans-serif;
+    color: #04395E;
+    background-color: transparent;
+    padding: 3% 6%; /* Adjust the padding as needed */
+    border: transparent;
+    border-radius: 7px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    font-size: 1.5rem;
+    white-space: nowrap
+}
+
+.navbar li button:hover {
+    background-color: #032d44;
+    color: #FFF; 
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.popup-content {  
+    background-color: #04395E;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 22rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.popup-overlay {  
+    background: rgba(0, 0, 0, 0.1); /*Modify the background light on popup */
+}
+
+
+.popup-content h1 {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.popup-content form input {
+    padding: 10px;
+    border: 1px solid #FFFFFF;
+    border-radius: 7px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    background-color: #04395E;
+    margin: 0.5rem 0;
+    width: calc(100% - 22px); /* Adjust width based on border and padding */
+}
+
+.popup-content button{
+    background-color: #FFFFFF;
+    color: #04395E;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+  
+.popup-content button:hover {
+    background-color: #032d44; /* Slightly darker color */
+    color: #FFFFFF;
+}
+
+.popup-message {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-top: 0;
+    font-size: 10px;
+}
+
+  
+.popup-label {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 5px;
+}
+
+
+
+.popup-input:focus::placeholder {
+    color: transparent;
+}
+
+
+
+
+.create-popup-content {
+    background-color: #04395E;
+    border-radius: 29px;
+    box-shadow: 2px 4px 8px 0px #000000B0;
+    width: 75%;
+    height: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+  
+.create-title {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-top: 0;
+    font-size: 18px
+}
+  
+.create-input-title {
+    background-color: #ccc;
+    /* Placeholder color */
+    &::placeholder {
+      color: white;
+    }
+    border-top: 2px solid red;
+}
+  
+.create-label {
+    color: white;
+    /* Additional styles */
+    font-size: 14px;
+}
+  
+.create-input-radio {
+    /* Styles for radio button */
+    input[type='radio'] {
+      /* Change circle color */
+      &::before {
+        background-color: white;
+      }
+      /* Change margin color */
+      &::after {
+        border-color: white;
+      }
+    }
+    /* Text color */
+    color: white;
+}
+  
+.create-input-answer,
+.create-button-delete,
+.create-button-add {
+    /* Same as create-input-title */
+    background-color: #ccc;
+    &::placeholder {
+      color: white;
+    }
+    border-top: 2px solid red;
+}
+  
+.create-button-poll {
+    color: #04395E;
+    background-color: white;
+    text-align: center;
+}
+

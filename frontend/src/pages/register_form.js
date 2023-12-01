@@ -1,6 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import Popup from 'reactjs-popup';
 
 const Register = () => {
+
+    const [blurr, setBlurr] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        blurr ? 
+            document.getElementById('main').style.filter = 'blur(5px)'
+            : 
+            document.getElementById('main').style.filter = 'blur(0px)'
+    }, [blurr])
+    
+    const handleBlurr = () => {
+        setBlurr(!blurr)
+        setOpen(!open)
+    }
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [passwordConfirm, setPasswordConfirm] = useState()
@@ -42,39 +59,59 @@ const Register = () => {
         })
     }
 
+    // const ClosePopup = () => {
+
+    // }
+    //TODO Adauga buton de inchidere
+
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor='email'>Email:</label>
-            <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <div>{emailMessage}</div>
-            <br></br>
-            <label htmlFor="password">Password:</label>
-            <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <label htmlFor="passwordConfirm">Confirm Password:</label>
-            <input
-                type="password"
-                id="passwordConfirm"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+        <>
+        <Popup 
+            trigger={
+                <button>
+                    Register
+                </button>
+                }
+            onOpen={handleBlurr}
+            onClose={handleBlurr}
+            modal
+            nested
+        >
+            <h1>Register</h1>
+            <form>
+                <label htmlFor='email'></label>
+                <input
+                    type="text"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
                 />
-            <br></br>
-            <div>{passwordMessage}</div>
-            <div>{succesMessage}</div>
-            <br></br>
-            <button type="submit">Register</button>
-        </form>
+                <label htmlFor="password"></label>
+                <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                />
+                <label htmlFor="passwordConfirm"></label>
+                <input
+                    type="password"
+                    id="passwordConfirm"
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    placeholder="Confirm password"
+                    />
+                <div className='popup-message'>
+                    {emailMessage}
+                    {passwordMessage}
+                    {succesMessage}
+                </div>
+            </form>
+            <button type="submit" onClick={handleSubmit} >Create account</button>
+        </Popup>
+        </>
     )
 }
 

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes ,Route} from 'react-router-dom'
-import NavbaNoUser from "./components/navbar_noUser"
-import NavbarYesUser from './components/navbar_yesUser'
-import Register from "./pages/register_form"
-import Login from './pages/login_form'
-import Logout from './pages/logout_form'
+import Navbar from './components/navbar'
+import "./styles.css"
 
 function App() {
   
-  const [message, setMessage] = useState()
+  // const [message, setMessage] = useState()
   const [isLogged, setIsLogged] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const handleGet = async () => {
       // event.preventDefault()
@@ -22,45 +19,23 @@ function App() {
       .then((response) => {
           if (response.status === 200) {
             setIsLogged(true)
+            setIsLoaded(true)
           } else {
             setIsLogged(false)
+            setIsLoaded(true)
           }
       })
   }
 
-  useEffect(() => handleGet)
+  useEffect(() => {
+    handleGet()
+  }, [])
 
   return (
-    <Router>
-        <div className='App'>
-          {!isLogged ?
-          <>
-            <NavbaNoUser />
-              <Routes>
-                <Route
-                  path="/register_form"
-                  element={<Register />}
-                />
-                <Route
-                  path="/login_form"
-                  element={<Login />}
-                />
-            </Routes>
-                <div>{message}</div>
-          </>
-          :
-          <>
-            <NavbarYesUser />
-              <Routes>
-                <Route
-                  path="/logout_form"
-                  element={<Logout />}
-                />
-              </Routes>
-          </>
-        }
-        </div>
-    </Router>
+    <div className="app" id="main">
+      <Navbar loaded={isLoaded} logged={isLogged}/>
+      
+    </div>
   )
 }
 
