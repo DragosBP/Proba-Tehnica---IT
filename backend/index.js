@@ -17,21 +17,54 @@ app.use(cors())
 
 function authentificateToken(req, res, next) {
     const token = req.headers['authorization']
-    if (token == null) res.status(401).send("NO LOGGED IN because NO TOKEN") // Pot modifica mai tarziu mesaju
+    if (token == null) res.status(422).send("NO LOGGED IN because NO TOKEN") // Pot modifica mai tarziu mesaju
     jwt.verify(token, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", (err, userId) => {
-        if (err) return res.status(402).send("NO LOGGED IN because TOKEN DEAD") // Post modifica mai tarziu mesajul
+        if (err) return res.status(498).send("NO LOGGED IN because TOKEN DEAD") // Post modifica mai tarziu mesajul
         req.userId = userId
         next()
     })
 }
 
 
-app.get('/polls', authentificateToken, (req, res) => {
-    // console.log(req.userId)
-    res.status(200).send("USER IS LOGGED IN")
+app.get('/user', authentificateToken, (req, res) => {
+    res.status(200).send(req.userId.userId)
 })
 
+app.get('/polls', (req, res) => {
+    try {
+        database.getPolls()
+            .then((polls) => {
+                let pollIdList = [];
+                let ownerIdList = [];
+                let titleList = [];
+                let isMultipleList = [];
+                let numberOfAnswersList = [];
+                let answersList = [];
+                let usersThatVotedList = [];
 
+                polls.forEach((poll) => {
+                    pollIdList.push(poll._id);
+                    ownerIdList.push(poll.owner);
+                    titleList.push(poll.title);
+                    isMultipleList.push(poll.isMultiple);
+                    numberOfAnswersList.push(poll.numberOfAnswers);
+                    answersList.push(poll.answers);
+                    usersThatVotedList.push(poll.usersThatVoted);
+                });
+                res.status(200).json({
+                    pollIdList,
+                    ownerIdList,
+                    titleList,
+                    isMultipleList,
+                    numberOfAnswersList,
+                    answersList,
+                    usersThatVotedList,
+                });
+            })
+    } catch (error) {
+        res.status(500).send("Error getting polls: " + error.message)
+    }
+})
 
 //Verifica emailul si parola dava sunt valide, daca nu sunt, trimtie un (400), altfel creeaza noul user
 app.post('/register', [
@@ -111,10 +144,27 @@ app.post('/logout', (req, res) => {
     res.status(200).send("USE LOGGED OUT")
 })
 
-app.post('/polls/create', authentificateToken, (req, res) => {
+app.post('/polls/create', [
+    authentificateToken,
+    check('title')
+    .notEmpty()
+    .withMessage("Tile cannot be empty")
+    ], (req, res) => {
     try {
-        console.log(req.body)
-        res.status(200)
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(402).send("Title cannot be empty")
+        }
+        let userId = req.userId.userId
+        let title = req.body.title
+        let isMultipleChoice = req.body.isMultipleChoice
+        let numberOfAnswers = req.body.numberOfAnswers
+        let answers = req.body.answers
+        database.addPoll(userId, title, isMultipleChoice, numberOfAnswers, answers)
+            .then((newPoll) => { 
+                res.status(200).send("Poll created with succes")
+            })
+        
     } catch (error) {
         res.status(500).send("Error finding user: " + error.message)
     }

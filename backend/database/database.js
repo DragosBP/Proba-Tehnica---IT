@@ -17,14 +17,14 @@ async function saveUser(userEmail, userPassword) {
         email: userEmail,
         password: userPassword,
     })
-        .then((newUser) => {
-          console.log("New User: ", newUser)
-          return newUser.toJSON()
-        })
-        .catch((error) => {
-          console.error("Error saving user: ", error)
-          throw error
-        })
+    .then((newUser) => {
+        console.log("New User: ", newUser)
+        return newUser.toJSON()
+    })
+    .catch((error) => {
+        console.error("Error saving user: ", error)
+        throw error
+    })
 }
 
 async function findUserByEmail(userEmail) {
@@ -52,8 +52,31 @@ async function saveSession(sessionId, userId) {
     })
 }
 
-async function addPoll(pollId, userId) {
-
+async function addPoll(userId, title, isMultiple, numberOfAnswers, answersWithoutVotes) {
+    const answersWithVotes = answersWithoutVotes.map(answer => ({
+        name: answer,
+        numberOfVotes: 0
+      }));
+    return Poll.create({
+        owner: userId,
+        title: title,
+        isMultiple: isMultiple,
+        numberOfAnswers: numberOfAnswers,
+        answers: answersWithVotes
+    })
+    .then((newPoll) => {
+        console.log("New Poll: ", newPoll)
+        return newPoll.toJSON()
+    })
+    .catch((error) => {
+        console.error("Error saving poll: ", error)
+        throw error
+    })
 }
 
-module.exports = {saveUser, findUserByEmail, saveSession}
+async function getPolls() {
+    const allPolls = await Poll.find();
+    return allPolls;
+}
+
+module.exports = {saveUser, findUserByEmail, saveSession, addPoll, getPolls}

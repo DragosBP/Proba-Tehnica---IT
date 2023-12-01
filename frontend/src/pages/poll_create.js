@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import Popup from 'reactjs-popup'
 import '../styles.css'
 
 const CreatePoll = () => {
+    const [blurr, setBlurr] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        blurr ? 
+            document.getElementById('main').style.filter = 'blur(5px)'
+            : 
+            document.getElementById('main').style.filter = 'blur(0px)'
+    }, [blurr])
+    
+    const handleBlurr = () => {
+        setBlurr(!blurr)
+        setOpen(!open)
+    }
+
     const [isMultipleChoice, setIsMultipleChoice] = useState(false)
     const [title, setTitle] = useState()
     const [errorMessage, setErrorMessage] = useState()
@@ -23,7 +39,12 @@ const CreatePoll = () => {
             })
         })
         .then((response) => {
-
+            //TODO: atauga logica pentru cand expira un token
+            if (response.status === 402) {
+                setErrorMessage("Title cannot be empty!")
+            }
+            if (response.status === 200)
+                setErrorMessage("Poll created with succes")
         })
     }
 
@@ -43,78 +64,91 @@ const CreatePoll = () => {
 
     useEffect(() => {
         setErrorMessage()
-    }, [answers])
+    }, [answers, title])
 
     return (
         <>
-            <h1 className='create-title'>
+        <Popup 
+            trigger={
+                <button>
+                    Create Poll
+                </button>}
+            onOpen={handleBlurr}
+            onClose={handleBlurr}
+            modal
+            nested
+            className="create-popup"
+        >
+            <h1>
                 Create a Poll
             </h1>
             <form>
-                <label className='create-label'>Title</label><br></br>
-                <input
-                    type='text'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder='Title your question here'
-                    className='create-input-title'    
-                >
-                </input>
                 <div>
-                    <label>
-                    <input
-                        type='radio'
-                        name='choice'
-                        value='single'
-                        checked={!isMultipleChoice}
-                        onChange={() => setIsMultipleChoice(false)}
-                        className='create-input-radio'
-                    />
-                    Single choice
-                    </label>
-                </div>
-                <div>
-                    <label>
-                    <input
-                        type='radio'
-                        name='choice'
-                        value='multiple'
-                        checked={isMultipleChoice}
-                        onChange={() => setIsMultipleChoice(true)}
-                        className='create-input-radio'
-                    />
-                    Multiple choice
-                    </label>
-                </div>
-                <div style={{ height: '15rem', overflowY: 'scroll', border: 'transparent', padding: '10px' }}>{/*TODO cand faci css, overflowY este ceea ce te intereseaza*/}
-                    {answers.map((answer, index) => (
-                        <div key={index}>
+                    <label>Title
                         <input
                             type='text'
-                            value={answer}
-                            onChange={(e) => {
-                            let value = e.target.value;
-                            const updatedAnswers = [...answers];
-                            updatedAnswers[index] = value;
-                            setAnswers(updatedAnswers);
-                            }}
-                            placeholder={"Answer " + (index + 1)}
-                            className='create-input-answer'
-                        />
-                        <button onClick={() => removeAnswer(index)} type='button' className='create-button-delete'>X</button>
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder='Title your question here'
+                            className='create-input-title'    
+                        >
+                        </input>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Voting type
+                        <label>
+                            <input
+                                type='radio'
+                                name='choice'
+                                value='single'
+                                checked={!isMultipleChoice}
+                                onChange={() => setIsMultipleChoice(false)}
+                                />
+                            <p>Single choice</p>
+                        </label>
+                        <label>
+                            <input
+                                type='radio'
+                                name='choice'
+                                value='multiple'
+                                checked={isMultipleChoice}
+                                onChange={() => setIsMultipleChoice(true)}
+                                />
+                            <p>Multiple choice</p>
+                        </label>
+                    </label>
+                </div>
+                <p>
+                    {answers.map((answer, index) => (
+                        <div key={index}>
+                            <input
+                                type='text'
+                                value={answer}
+                                onChange={(e) => {
+                                let value = e.target.value;
+                                const updatedAnswers = [...answers];
+                                updatedAnswers[index] = value;
+                                setAnswers(updatedAnswers);
+                                }}
+                                placeholder={"Option " + (index + 1)}
+                            />
+                            <button onClick={() => removeAnswer(index)} type='button'>X</button>
                         </div>
                     ))}
-                </div>
-                <button onClick={addAnswer} type='button' className='crate-button-answer'> {/*TODO Trebuie svhimbat si asta */}
-                    Add option
-                </button>
-                <button type='submit' onClick={handleSubmit} className='create-button-poll'>
-                    Create Poll
-                </button>
-                <div className='popup-message'>
+                    <button onClick={addAnswer} type='button'> {/*TODO Trebuie svhimbat si asta */}
+                        +Add option
+                    </button>
+                </p>
+                <h3>
                     {errorMessage}
-                </div>
+                </h3>
             </form>
+            <button type='submit' onClick={handleSubmit}>
+                Create Poll
+            </button>
+        </Popup>
         </>
     )
 }

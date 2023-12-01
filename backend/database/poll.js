@@ -10,15 +10,15 @@ const pollSchema = new Mongoose.Schema({
     numberOfAnswers: Number,
     answers: [ {
         name: String,
-        numberOfVotes: {
-            type: Number,
-            default: 0
-        }
+        numberOfVotes: Number
     }],
     usersThatVoted: [ {
-        type: Mongoose.SchemaTypes.ObjectId,
-        ref: "User",
-        answers: [Number]
+        userId: {
+            type: Mongoose.SchemaTypes.ObjectId,
+            ref: "User",
+        },
+        answers: [Number],
+        default: []
     }]
 });
 

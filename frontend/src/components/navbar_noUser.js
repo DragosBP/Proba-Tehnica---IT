@@ -4,7 +4,6 @@ import Login from "../pages/login_form";
 import "../styles.css"
  
 const NavbarNoUser = () => {
-    //TODO: vezi ce poti face sa fie alea mai bine puse la login si logout ca sa fie distante egale
     return (
         <>
             <li>

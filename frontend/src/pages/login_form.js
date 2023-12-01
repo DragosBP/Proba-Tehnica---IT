@@ -61,7 +61,7 @@ const Login = () => {
             modal
             nested
         >
-            <h1 >Login</h1>
+            <h1>Login</h1>
             <form>
                 <label htmlFor='email'></label>
                 <input
@@ -81,8 +81,8 @@ const Login = () => {
                     placeholder='Password'
                 />
                 <div className='popup-message'>{errorMessage}</div>
-                <button type="submit" onClick={handleSubmit}>Login</button>
             </form>
+            <button type="submit" onClick={handleSubmit}>Login</button>
         </Popup>
         </>
     )
