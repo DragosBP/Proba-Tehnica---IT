@@ -1,22 +1,58 @@
-import React from 'react'
+import React, {useState} from 'react';
 
 const PollNoUser = (props) => {
 
+    const [errorMessage, setErrorMessage] = useState() 
+
+
     return (
-        <form>
-            <h1>{props.title}</h1>
+        <>
+            <div className='poll-title'>{props.title}</div>
             {!props.isMultiple ? (
                 <>
-                    <h3>Choose an option</h3>
-                    {}
+                    <h3>Make a choice</h3>
+                    <div className='poll-input'>
+                        {
+                            props.answers.map((answer, index) => (
+                                <p key={index}>
+                                    <input
+                                        type="radio"
+                                        value={answer.name}
+                                        onClick={()=>{setErrorMessage("Please authentificate before you vote!")}}
+                                        // disabled
+                                    />
+                                    <label type='radio'>{answer.name}</label>
+                                </p>
+                            ))
+                        }
+                    </div>
                 </>
             ) : (
                 <>
-                    <h3>Choose multiple options</h3>
+                    <h3>Make multiple choices</h3>
+                    <div className='poll-input'>
+                    {
+                        props.answers.map((answer, index) => (
+                            <p key={index}>
+                                <input
+                                    type="checkbox"
+                                    value={answer.name}
+                                    onClick={()=>{setErrorMessage("Please authentificate before you vote!")}}
+                                    // disabled
+                                />
+                                <label type="checkbox">{answer.name}</label>
+                            </p>
+                        ))
+                    }
+                    </div>
                 </>
             )}
-        </form>
+            <div className='poll-error'>
+                    {errorMessage}
+            </div>
+        </>
     )
 }
+
 
 export default PollNoUser

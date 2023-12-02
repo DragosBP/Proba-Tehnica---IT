@@ -16,12 +16,13 @@ Login:
 	-responive: NOT STARTED
 Polls:
 	-adaugare in baza de date: DONE
-	-afisarea tuturor pollurilor in pagina principala: NOT STARTET(map)
+	-afisarea tuturor pollurilor in pagina principala: DONE
 	-verificare poll detinut de un user: DONE
 	-stergere poll: NOT STARTED
 	-votare la poll: NOT STARTED
 	-modificare poll doar de owner: NOT STARTED
 	-modificare raspuns: NOT STARTED
-	-basic U.I.: NOT STARTED
-	-good U.I.: NOT STARTED
-	-responsive: NOT STARTED
+	(doar pentru fara user)
+	-basic U.I.: DONE
+	-good U.I.: DONE
+	-responsive: DONE

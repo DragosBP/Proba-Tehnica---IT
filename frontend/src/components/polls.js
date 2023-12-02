@@ -29,8 +29,7 @@ const Polls = (props) => {
     }, [])
 
     return (
-        <div>
-            <ul>
+        <>
             {props.loaded ? (
                 <>
                     {props.logged ? (
@@ -68,8 +67,7 @@ const Polls = (props) => {
                     <h1>Loading</h1> {/*Felt cute, might delete later*/}
                 </>
                 )}
-            </ul>
-        </div>
+        </>
     )
 }
 

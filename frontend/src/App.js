@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './components/navbar'
 import Polls from './components/polls'
+import Footer from './components/footer'
 import "./styles.css"
 
 function App() {
@@ -72,23 +73,25 @@ function App() {
         loaded={isLoaded} 
         logged={isLogged}
       />
-      {pollsIdList.map((_, index) => (
-      <div key={index}>
-        <Polls
-          loaded={isLoaded} 
-          logged={isLogged}
-
-          userId={userId} 
-          pollId={pollsIdList[index]}
-          ownerId={ownerIdList[index]}
-          title={titleList[index]}
-          isMultple={isMultipleList[index]}
-          numberOfAnswers={numberOfAnswersList[index]}
-          answers={answersList[index]}
-          usersThatVoted={usersThatVotedList[index]}
-        />
+      <div className='poll'>
+        {pollsIdList.map((_, index) => (
+          <div key={index}>
+              <Polls
+                  loaded={isLoaded} 
+                  logged={isLogged}
+                  userId={userId} 
+                  pollId={pollsIdList[index]}
+                  ownerId={ownerIdList[index]}
+                  title={titleList[index]}
+                  isMultiple={isMultipleList[index]}
+                  numberOfAnswers={numberOfAnswersList[index]}
+                  answers={answersList[index]}
+                  usersThatVoted={usersThatVotedList[index]}
+              />
+          </div>
+      ))}
       </div>
-    ))}
+      <Footer />
     </div>
   )
 }

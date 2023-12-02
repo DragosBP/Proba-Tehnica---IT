@@ -127,10 +127,10 @@ const CreatePoll = () => {
                                 type='text'
                                 value={answer}
                                 onChange={(e) => {
-                                let value = e.target.value;
-                                const updatedAnswers = [...answers];
-                                updatedAnswers[index] = value;
-                                setAnswers(updatedAnswers);
+                                    let value = e.target.value;
+                                    const updatedAnswers = [...answers];
+                                    updatedAnswers[index] = value;
+                                    setAnswers(updatedAnswers);
                                 }}
                                 placeholder={"Option " + (index + 1)}
                             />

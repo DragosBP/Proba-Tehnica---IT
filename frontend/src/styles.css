@@ -13,7 +13,32 @@ body {
     filter: blur(5px);
   }
 
-.navbar {
+
+.footer {
+    background-color: #FF1F66;
+    color: white;
+    margin-top: 5%;
+    width: 100%;
+    height: 10vh;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+
+    @media only screen and (min-width: 768px) {
+        height: 15vh;
+    }
+}
+
+.image{
+
+    height: 50%;
+    width: 50%;
+}
+
+
+.navbar nav {
     background-color: #FFF;
     box-shadow: 0px 1px 14px 0px #021B2C;    
     color: #04395E;
@@ -23,11 +48,17 @@ body {
     align-items: center;
 }
 
-.navbar a{
+.navbar.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar nav a{
     color: inherit;
 }
 
-.navbar ul {
+.navbar nav ul {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -35,7 +66,7 @@ body {
     gap: 1rem
 }
 
-.navbar li button {
+.navbar nav li button {
     font-family: 'Inter', sans-serif;
     color: #04395E;
     background-color: transparent;
@@ -48,7 +79,7 @@ body {
     white-space: nowrap
 }
 
-.navbar li button:hover {
+.navbar nav li button:hover {
     background-color: #032d44;
     color: #FFF; 
 }
@@ -169,7 +200,6 @@ body {
     align-items: center;
 }
 
-  
 .create-popup-content h1 {
     color: #FFFFFF;
     font-family: 'Inter', sans-serif;
@@ -231,7 +261,7 @@ body {
     border-radius: 50%;
     border-color: white;
     height: 10px;
-    width: 10px; /*TODO De ce nu e dimensiunea care trebuie*/
+    width: 10px;
     padding: 0.5rem;
     outline: none;
     cursor: pointer;
@@ -298,3 +328,171 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+
+
+.poll {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.poll div {
+
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    min-width: 90%;
+    max-width: 90%;
+
+    height: 70vh;
+    /* max-height: 30vh; */
+    /* min-height: 200px; */
+
+    @media only screen and (min-width: 768px) {
+        margin-left: 6%;
+        margin-right: 1%;
+        margin-top: 1.5%;
+        min-width: 40%;
+        max-width: 40%;
+        height: 60vh;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.poll div.poll-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    width: 100%;
+    min-width: none;
+    max-width: none;
+    
+    min-height: 5%;
+    height: auto;
+    max-height: 15%;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.poll div h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: black;
+    margin: 0;
+    margin-top: 2%;
+}
+
+.poll div.poll-input {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    
+    max-width: none;
+    min-height: none;
+    height: 55%;
+
+    overflow:auto;
+    
+    @media only screen and (min-width: 768px) {
+        height: 65%;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.poll div.poll-input p {
+    display: flex;
+    align-items: center;
+}
+
+.poll div.poll-input p label {
+    font-family: 'Inter', sans-serif;
+    /* font-size: 14px; */
+    font-size: 95%;
+    color: black;
+}
+
+.poll div.poll-input p label[type='radio'] {
+    align-self:last baseline;
+}
+
+.poll div.poll-input p input[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+    align-self: center;
+
+    cursor: pointer;
+
+    background-color: white;
+    border: 2px solid #04395E;
+}
+
+.poll div.poll-input p input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0.5rem;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+    align-self: center;
+
+    cursor: pointer;
+
+    background-color: white;
+    border: 2px solid #04395E;
+}
+
+.poll div.poll-error {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    /* background-color: black; */
+
+    margin-top: 2%;
+
+    max-width: none;
+    min-height: none;
+    height: 5%;
+
+    
+    @media only screen and (min-width: 768px) {
+        height: 8%;
+    }
+}

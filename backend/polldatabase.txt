@@ -1,0 +1,104 @@
+[
+  {
+    _id: new ObjectId('656a4b650ee2ace1900f7644'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Primul de test',
+    isMultiple: false,
+    numberOfAnswers: 3,
+    answers: [ [Object], [Object], [Object] ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4b820ee2ace1900f7649'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Al doilea cu multe',
+    isMultiple: false,
+    numberOfAnswers: 9,
+    answers: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4b9e0ee2ace1900f7654'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Al treile cu multe, dar si multipla',
+    isMultiple: false,
+    numberOfAnswers: 8,
+    answers: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4bb40ee2ace1900f765e'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Al patrule cu putine, dar si multipla',
+    isMultiple: false,
+    numberOfAnswers: 4,
+    answers: [ [Object], [Object], [Object], [Object] ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4bb60ee2ace1900f7664'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Al patrule cu putine, dar si multipla',
+    isMultiple: true,
+    numberOfAnswers: 4,
+    answers: [ [Object], [Object], [Object], [Object] ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4bc20ee2ace1900f766a'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'Al patrule cu putine, c',
+    isMultiple: true,
+    numberOfAnswers: 8,
+    answers: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4be10ee2ace1900f7674'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'hai da ;cjsdjkvhdsjbcjbscbjbaschkgbajkvykgabchmsvcyiksjhcvyisdcbjasgfcsvjhcvsyajdvschkvyuhawdvkvhcvsahvcvvashvcuvwhcvhvauwcjavscvvabc javchvhawv chjguoacjvwahcuogcjk ajcguowbcjhvwayicguj awdcuwcbhjvhwjcguoj wajc ohcajkvchjl hco oiocbihu uiguiiwcg igwacygc yifawygywgfyiw ywfyw uyfwy fwf duydwfywd fywfyuwdf yiw fyiwgyiw ywfguiwg ',
+    isMultiple: true,
+    numberOfAnswers: 3,
+    answers: [ [Object], [Object], [Object] ],
+    usersThatVoted: [],
+    __v: 0
+  },
+  {
+    _id: new ObjectId('656a4bf20ee2ace1900f7679'),
+    owner: new ObjectId('656a4b4a0ee2ace1900f763e'),
+    title: 'hai da ;cjsdjkvhdsjbcjbscbjbaschkgbajkvykgabchmsvcyiksjhcvyisdcbjasgfcsvjhcvsyajdvschkvyuhawdvkvhcvsahvcvvashvcuvwhcvhvauwcjavscvvabc javchvhawv chjguoacjvwahcuogcjk ajcguowbcjhvwayi HEEEYYEYEEYYEYYEY cguj awdcuwcbhjvhwjcguoj wajc ohcajkvchjl hco oiocbihu uiguiiwcg igyiwgyiw ywfguiwg ',
+    isMultiple: false,
+    numberOfAnswers: 9,
+    answers: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ],
+    usersThatVoted: [],
+    __v: 0
+  }
+]
