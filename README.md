@@ -4,7 +4,7 @@ Register:
 	-basic U.I.: DONE
 	-hash parola: DONE
 	-good U.I.: DONE
-	-responive: NOT STARTED
+	-responive: DONE
 Login:
 	-verificare input: DONE
 	-cautare dupa mail: DONE
@@ -13,15 +13,15 @@ Login:
 	-creare sesiune cu toke: DONE(without refresh token)
 	-cookies: NOT DOING IT
 	-good U.I.: DONE
-	-responive: NOT STARTED
+	-responive: DONE
 Polls:
 	-adaugare in baza de date: DONE
 	-afisarea tuturor pollurilor in pagina principala: DONE
 	-verificare poll detinut de un user: DONE
-	-stergere poll: NOT STARTED
-	-votare la poll: NOT STARTED
+	-stergere poll: DONE
+	-votare la poll: DONE
 	-modificare poll doar de owner: NOT STARTED
-	-modificare raspuns: NOT STARTED
+	-modificare raspuns: DONE
 	(doar pentru fara user)
 	-basic U.I.: DONE
 	-good U.I.: DONE
