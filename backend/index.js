@@ -19,7 +19,7 @@ function authentificateToken(req, res, next) {
     const token = req.headers['authorization']
     if (token == null) res.status(422).send("NO LOGGED IN because NO TOKEN") // Pot modifica mai tarziu mesaju
     jwt.verify(token, "ARTREBUIECEVADESTEPTFACUTAICIPOATECUUNREFRESHTOKEN", (err, userId) => {
-        if (err) return res.status(498).send("NO LOGGED IN because TOKEN DEAD") // Post modifica mai tarziu mesajul
+        if (err) return res.status(498).send("NO LOGGED IN because TOKEN DEAD") // Pot modifica mai tarziu mesajul
         req.userId = userId
         next()
     })

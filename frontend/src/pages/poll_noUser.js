@@ -19,7 +19,6 @@ const PollNoUser = (props) => {
                                         type="radio"
                                         value={answer.name}
                                         onClick={()=>{setErrorMessage("Please authentificate before you vote!")}}
-                                        // disabled
                                     />
                                     <label type='radio'>{answer.name}</label>
                                 </p>
@@ -38,7 +37,6 @@ const PollNoUser = (props) => {
                                     type="checkbox"
                                     value={answer.name}
                                     onClick={()=>{setErrorMessage("Please authentificate before you vote!")}}
-                                    // disabled
                                 />
                                 <label type="checkbox">{answer.name}</label>
                             </p>

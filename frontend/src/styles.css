@@ -1,3 +1,8 @@
+/* @media only screen and (min-width: 768px) { */
+    /* display: block;
+    margin: 0 auto; */
+    /* white-space: nowrap */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 * {
@@ -6,44 +11,24 @@
 
 body {
     margin: 0;
+    padding: 0;
     background: #04395E;
 }
 
 .blur-background {
     filter: blur(5px);
-  }
-
-
-.footer {
-    background-color: #FF1F66;
-    color: white;
-    margin-top: 5%;
-    width: 100%;
-    height: 10vh;
-
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    align-items: center;
-
-    @media only screen and (min-width: 768px) {
-        height: 15vh;
-    }
 }
 
-.image{
 
-    height: 50%;
-    width: 50%;
+.navbar {
+    min-height: 5%;
 }
-
 
 .navbar nav {
     background-color: #FFF;
     box-shadow: 0px 1px 14px 0px #021B2C;    
     color: #04395E;
     display: flex;
-    padding: 1rem;
     justify-content: space-between;
     align-items: center;
 }
@@ -52,6 +37,39 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+}
+
+.navbar nav img {
+    max-width: 100%;
+    padding-left: 2%;
+}
+
+.navbar nav div.hamburger-menu {
+    max-width: 10%;
+    max-height: 100%;
+}
+
+.navbar nav div.hamburger-menu button {
+    background-color: white;
+    border: 0;
+    margin: 0;
+    box-shadow: 0;
+    padding: 0;
+    cursor: pointer;
+
+    display: block;
+    margin: 0 auto;
+}
+
+.navbar nav div.hamburger-menu button img {
+    display: block;
+    margin: 0 auto;
+}
+
+.navbar nav div.hamburger-menu div {
+    height: 100px;
+    width: 100px;
+    background-color: black;
 }
 
 .navbar nav a{
@@ -63,19 +81,27 @@ body {
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 1rem
+    gap: 1rem;
+    margin-right: 2%;
+    
+}
+
+.navbar nav li {
+    display: block;
+    margin: 0 auto;
 }
 
 .navbar nav li button {
     font-family: 'Inter', sans-serif;
     color: #04395E;
     background-color: transparent;
-    padding: 3% 6%; /* Adjust the padding as needed */
+    padding: 3% 6%;
     border: transparent;
     border-radius: 7px;
     transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 2.3rem;
+    height: 100%;
     white-space: nowrap
 }
 
@@ -93,6 +119,52 @@ body {
     border: 1px solid #ccc;
     border-radius: 3px;
     cursor: pointer;
+}
+
+
+.extra {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.extra div {
+    width: 20%;
+    height: 20%;
+    flex: 1;
+}
+
+.extra div p {
+    padding-left: 13%;
+    padding-right: 5%;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 13px;
+    letter-spacing: -0.005em;
+    text-align: left;
+    
+    color: #FFFFFF;
+    
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 47px;
+        letter-spacing: -0.005em;
+        text-align: left;
+    }
+}
+
+.extra div img {
+    max-width: 100%;
+    width: 800px;
+    display: block;
+    margin: 0 auto;
 }
 
 
@@ -130,6 +202,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .popup-content form input {
@@ -140,7 +213,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #04395E;
     margin: 0.8rem 0;
-    width: 150%;
+    width: 100%;
 }
 
 .popup-content button{
@@ -151,10 +224,11 @@ body {
     padding: 12px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    width: 50%;
+    width: 70%;
     margin: 0.5rem 0;
     font-size: large;
     font-weight: bold;
+    white-space: nowrap
 }
   
 .popup-content button:hover {
@@ -202,12 +276,24 @@ body {
 
 .create-popup-content h1 {
     color: #FFFFFF;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-    margin-top: 0;
-    font-size: 2.5rem;
-    font-weight: bold;
     align-self: center;
+
+    font-family: Inter;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 48px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
 }
 
 .create-popup-content form {
@@ -216,29 +302,54 @@ body {
     align-self: flex-start;
     align-items: flex-start;
     justify-content: space-evenly;
-    margin-left: 1.5rem;
+    /* margin-left: 1.5rem; */
 }
 
 .create-popup-content form div {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
 }
 
 .create-popup-content form div label {
     color: #FFFFFF;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.5rem;
+    width: 100%;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: -0.005em;
+    text-align: left;
+
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
 }
 
 .create-popup-content form div label input {
     background-color: #7f9aad;
-    max-width: 45rem;
-    width: 275%;
+    width: 100%;
+    border-radius: 3px;
+    
+
+    border-top: 2px solid #ff1f66;
+    height: 31px;
+
+    @media only screen and (min-width: 768px) {
+        height: auto;
+        border-top: 5px solid #ff1f66;
+    }
     &::placeholder {
       color: white;
     }
-    border-top: 5px solid #ff1f66;
-    border-radius: 0%;
 }
 
 .create-popup-content form div label label {
@@ -282,7 +393,7 @@ body {
     overflow-y: scroll;
     border: transparent;
     max-width: 45rem;
-    width: 275%;
+    width: 100%;
 }
 
 .create-popup-content form p div input{
@@ -317,8 +428,7 @@ body {
     border-radius: 0%;
     height: 2.5rem;
     color: white;
-    width: 25%;
-    height: 2.5rem;
+    width: fit-content;
     white-space: nowrap;
     align-content: center;
 }
@@ -326,6 +436,7 @@ body {
 .create-popup-content form h3 {
     color: white;
     font-family: 'Inter', sans-serif;
+    margin: 0;
 }
 
 
@@ -334,6 +445,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    min-height: 55%;
 }
 
 .poll div {
@@ -345,15 +457,13 @@ body {
     background-color: white;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    min-width: 90%;
-    max-width: 90%;
 
-    height: 70vh;
-    /* max-height: 30vh; */
-    /* min-height: 200px; */
+    margin-left: 8%;
+    margin-top: 5%;
+    min-width: 85%;
+    max-width: 85%;
+
+    height: 30vh;
 
     @media only screen and (min-width: 768px) {
         margin-left: 6%;
@@ -361,7 +471,7 @@ body {
         margin-top: 1.5%;
         min-width: 40%;
         max-width: 40%;
-        height: 60vh;
+        height: 500px;
     }
     display: flex;
     flex-direction: column;
@@ -370,10 +480,13 @@ body {
 
 
 .poll div.poll-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
+    font-family: Inter;
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left;
+    
     margin: 0;
     border: 0;
     padding: 0;
@@ -386,39 +499,64 @@ body {
     
     min-height: 5%;
     height: auto;
-    max-height: 15%;
+    max-height: 17%;
     
     overflow-x: hidden;
     overflow-y: auto;
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+        max-height: 19%;
+    }
 }
 
 .poll div h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-family: Inter;
+    font-size: 7px;
+    font-weight: 300;
+    line-height: 8px;
+    letter-spacing: 0em;
+    text-align: left;
+
     color: black;
     margin: 0;
     margin-top: 2%;
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
 }
 
 .poll div.poll-input {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    font-size: 16px;
     color: black;
     margin: 0;
     border: 0;
     padding: 0;
     border-radius: 0;
     box-shadow: none;
+
+    margin-bottom: 2%;
     
     max-width: none;
     min-height: none;
-    height: 55%;
+    max-height: 56%;
 
     overflow:auto;
     
     @media only screen and (min-width: 768px) {
-        height: 65%;
+        max-height: 45%;
     }
 
     display: flex;
@@ -429,16 +567,31 @@ body {
 .poll div.poll-input p {
     display: flex;
     align-items: center;
+    margin-bottom: 1%;
 }
 
 .poll div.poll-input p label {
-    font-family: 'Inter', sans-serif;
-    /* font-size: 14px; */
-    font-size: 95%;
+    font-family: Inter;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 11px;
+    letter-spacing: 0em;
+    text-align: left;
+
     color: black;
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 29px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
 }
 
-.poll div.poll-input p label[type='radio'] {
+.poll div.poll-input p label[type='radio']{
     align-self:last baseline;
 }
 
@@ -447,7 +600,7 @@ body {
     -moz-appearance: none;
     appearance: none;
     border-radius: 50%;
-    padding: 0.5rem;
+    padding: 0.25rem;
     outline: none;
     transition: background-color 0.2s, border-color 0.2s;
     align-self: center;
@@ -455,14 +608,19 @@ body {
     cursor: pointer;
 
     background-color: white;
-    border: 2px solid #04395E;
+    border: 1px solid #04395E;
+
+    @media only screen and (min-width: 768px) {
+        padding: 0.5rem;
+        border: 3px solid #04395E;
+    }
 }
 
 .poll div.poll-input p input[type='checkbox'] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding: 0.5rem;
+    padding: 0.25rem;
     outline: none;
     transition: background-color 0.2s, border-color 0.2s;
     align-self: center;
@@ -470,13 +628,23 @@ body {
     cursor: pointer;
 
     background-color: white;
-    border: 2px solid #04395E;
+    border: 1px solid #04395E;
+
+    @media only screen and (min-width: 768px) {
+        padding: 0.5rem;
+        border: 3px solid #04395E;
+    }
 }
 
 .poll div.poll-error {
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
+    font-family: Inter;
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
     color: black;
     margin: 0;
     border: 0;
@@ -494,5 +662,56 @@ body {
     
     @media only screen and (min-width: 768px) {
         height: 8%;
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+
+
+
+.footer {
+    background-color: #FF1F66;
+    color: white;
+    padding:none;
+    margin-top: 5%;
+    width: 100%;
+    min-height: 15%;
+
+    display: flex;
+    align-items: center;
+}
+
+.footer div{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer div a{
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (min-width: 768px) {
+        height: 60%;
+    }
+}
+
+.footer div a img{
+    margin-top: 8%;
+    margin-bottom: 8%;
+    width: 20%;
+
+    @media only screen and (min-width: 768px) {
+        width: 60%;
     }
 }

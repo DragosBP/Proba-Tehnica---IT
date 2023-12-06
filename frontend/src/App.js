@@ -3,6 +3,8 @@ import Navbar from './components/navbar'
 import Polls from './components/polls'
 import Footer from './components/footer'
 import "./styles.css"
+import mascot from './images/mascot.jpeg'
+
 
 function App() {
   
@@ -73,6 +75,18 @@ function App() {
         loaded={isLoaded} 
         logged={isLogged}
       />
+      <div className='extra'>
+        <div>
+          <p>
+              Opiniile sunt mai importante ca niciodată. Platformele de 
+              sondaje permit organizatorilor să culeagă feedback direct de 
+              la audiența lor și să înțeleagă mai bine nevoile și dorințele acesteia.
+          </p>
+        </div>
+        <div>
+          <img src={mascot} alt='mascot'/>
+        </div>
+      </div>
       <div className='poll'>
         {pollsIdList.map((_, index) => (
           <div key={index}>
@@ -91,7 +105,11 @@ function App() {
           </div>
       ))}
       </div>
-      <Footer />
+      {isLoaded && (
+        <>
+          <Footer />
+        </>
+      )}
     </div>
   )
 }

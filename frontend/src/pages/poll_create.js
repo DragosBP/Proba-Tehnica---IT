@@ -84,7 +84,7 @@ const CreatePoll = () => {
             </h1>
             <form>
                 <div>
-                    <label>Title
+                    <label>Title<br></br>
                         <input
                             type='text'
                             value={title}
