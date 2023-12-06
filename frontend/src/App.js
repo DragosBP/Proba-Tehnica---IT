@@ -3,7 +3,7 @@ import Navbar from './components/navbar'
 import Polls from './components/polls'
 import Footer from './components/footer'
 import "./styles.css"
-import mascot from './images/mascot.jpeg'
+import mascot from './images/mascot.png'
 
 
 function App() {
@@ -74,6 +74,7 @@ function App() {
       <Navbar 
         loaded={isLoaded} 
         logged={isLogged}
+        handleGetPolls={handleGetPolls}
       />
       <div className='extra'>
         <div>
@@ -101,6 +102,7 @@ function App() {
                   numberOfAnswers={numberOfAnswersList[index]}
                   answers={answersList[index]}
                   usersThatVoted={usersThatVotedList[index]}
+                  handleGetPolls={handleGetPolls}
               />
           </div>
       ))}
@@ -114,4 +116,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import PollNoUser from '../pages/poll_noUser'
+import PollTheUser from "../pages/poll_theUser";
 import "../styles.css"
 
 const Polls = (props) => {
@@ -36,7 +37,13 @@ const Polls = (props) => {
                     <>
                         {isOwner ? (
                             <>
-                                <h1>Eu detin pe astea</h1>
+                                <PollTheUser
+                                    title={props.title}
+                                    isMultiple={props.isMultiple}
+                                    answers={props.answers}
+                                    pollId={props.pollId}
+                                    handleGetPolls={props.handleGetPolls}
+                                />
                             </>
                         ) : (
                             <>

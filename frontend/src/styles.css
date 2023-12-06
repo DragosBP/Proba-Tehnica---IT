@@ -12,7 +12,9 @@
 body {
     margin: 0;
     padding: 0;
-    background: #04395E;
+    
+    background-image: url('./images/background.jpeg');
+    background-size: 100% 100%;
 }
 
 .blur-background {
@@ -121,6 +123,60 @@ body {
     cursor: pointer;
 }
 
+.menu-space {
+    margin-left: 66%;
+    width: 35%;
+    height: 10vh;
+
+    display: block;
+}
+
+.menu-space div {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px;
+    height: 100%;
+}
+
+.menu-space div li {
+    list-style-type: none;
+    box-shadow: none;
+    background-color: white;
+    width: 100%;
+    height: 50%;
+}
+
+.menu-space div li button {
+    box-shadow: none;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 12px, 13px, 17px, 60px;
+    padding-right: 10%;
+    border-radius: 1px;
+    cursor: pointer;
+    border: 0;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: right;
+
+    color: #04395E;
+
+
+}
+
+.menu-space div li button:hover {
+    background-color: #032d44;
+    color: #FFFFFF;
+}
+
+
 
 .extra {
     height: 20%;
@@ -216,6 +272,25 @@ body {
     width: 100%;
 }
 
+.popup-content form div {
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 48px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
 .popup-content button{
     background-color: #FFFFFF;
     color: #04395E;
@@ -232,7 +307,7 @@ body {
 }
   
 .popup-content button:hover {
-    background-color: #032d44; /* Slightly darker color */
+    background-color: #032d44;
     color: #FFFFFF;
 }
 
@@ -262,16 +337,21 @@ body {
     border-radius: 29px;
     box-shadow: 2px 4px 8px 0px #000000B0;
     max-width: 52rem;
-    max-height: 56rem;
     width: 85%;
-    height: 80%;
-    min-height: 48rem;
-    /* min-width: 46rem; */
-    /* margin: 0 auto; */
+
+
+    min-height: 60%;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
+    overflow: auto;
+
+    @media only screen and (min-width: 768px) {
+        min-height: 90%;
+    }
 }
 
 .create-popup-content h1 {
@@ -334,35 +414,67 @@ body {
 
 }
 
-.create-popup-content form div label input {
+.create-popup-content form div label input.create-input-title {
     background-color: #7f9aad;
     width: 100%;
     border-radius: 3px;
-    
+    font-family: Inter;
+    font-size: 10px;
 
+    border: 0;
     border-top: 2px solid #ff1f66;
     height: 31px;
 
     @media only screen and (min-width: 768px) {
-        height: auto;
+        height: 2.5rem;
         border-top: 5px solid #ff1f66;
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+
     }
     &::placeholder {
       color: white;
     }
 }
 
+.create-popup-content form div label input.create-input-title:focus {
+    outline: 0;
+}
+
 .create-popup-content form div label label {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    white-space: nowrap
+    white-space: nowrap;
+    margin-bottom: 1%;
 }
 
 .create-popup-content form div label label p {
-    font-size: 1rem;
     color: #FFF;
-    padding-left: 0.5rem;
+    font-family: Inter;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: -0.005em;
+    text-align: left;
+
+    margin-bottom: 0;
+
+    margin-left: 2%;
+    /* align-self: center; */
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
 }
 
 .create-popup-content form div label label input[type='radio'] {
@@ -373,12 +485,22 @@ body {
     border-color: white;
     height: 10px;
     width: 10px;
-    padding: 0.5rem;
+
+    margin-bottom: 0;
+    margin-top: 0;
+
+    padding: .1rem;
+    
+
     outline: none;
     cursor: pointer;
     background-color: #04395E;
     transition: background-color 0.2s, border-color 0.2s;
     align-self: center;
+
+    @media only screen and (min-width: 768px) {
+        padding: 0.5rem;
+    }
 }
 
 .create-popup-content form div label label input[type='radio']:checked {
@@ -389,54 +511,194 @@ body {
 }
 
 .create-popup-content form p {
-    max-height: 20rem;
+    max-height: 21vh;
     overflow-y: scroll;
     border: transparent;
-    max-width: 45rem;
     width: 100%;
+    margin-top: 0;
+    @media only screen and (min-width: 768px) {
+        max-height: 20rem;
+    }
 }
 
+
+.create-popup-content h4 {
+    color: white;
+    margin-bottom: 0;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: -0.005em;
+    text-align: left;
+
+    
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+
 .create-popup-content form p div input{
+    border: 0;
     background-color: #7f9aad;
     width: 275%;
+    border: 0px;
+    font-family: Inter;
+    font-size: 10px;
+
+    margin-top: 0;
+    margin-bottom: 3%;
+
+    border-top: 2px solid #ff1f66;
+    height: 31px;
+    
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    
+
+    @media only screen and (min-width: 768px) {
+        height: 2.5rem;
+        border-top: 5px solid #ff1f66;
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
     &::placeholder {
       color: white;
     }
-    border: 0px;
-    border-top: 5px solid #ff1f66;
-    border-radius: 0%;
-    height: 2.5rem;
 }
 
 .create-popup-content form p div input:focus {
-    outline: none;
-    border: none;
-    border-top: 5px solid #ff1f66;
+    outline: 0;
 }
+
 
 .create-popup-content form p div button {
     background-color: #7f9aad;
-    border-top: 5px solid #ff1f66;
-    border-radius: 0%;
-    height: 2.5rem;
+
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    
     align-self: center;
     width: 10%;
+
+    margin-top: 0;
+    margin-bottom: 3%;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    border-top: 2px solid #ff1f66;
+    height: 31px;
+    font-size: 15px;
+
+    display: flex;
+    align-items: center;
+
+    @media only screen and (min-width: 768px) {
+        border-top: 5px solid #ff1f66;
+        height: 2.5rem;
+        font-size: 20px;
+
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
 }
 
 .create-popup-content form p button {
     background-color: #7f9aad;
-    border-radius: 0%;
-    height: 2.5rem;
     color: white;
     width: fit-content;
     white-space: nowrap;
     align-content: center;
+    
+    height: fit-content;
+    border-radius: 2px;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: -0.005em;
+    text-align: left;
+
+    @media only screen and (min-width: 768px) {
+        border-radius: 5px;
+        
+
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
 }
 
 .create-popup-content form h3 {
     color: white;
-    font-family: 'Inter', sans-serif;
     margin: 0;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: -0.005em;
+    text-align: left;
+
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 31px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+.create-popup-content button{
+    height: fit-content;
+    width: fit-content;
+
+    border-radius: 3px;
+
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+    @media only screen and (min-width: 768px) {
+        border-radius: 5px;
+        
+
+        font-family: Inter;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 39px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
 }
 
 
@@ -671,7 +933,44 @@ body {
     }
 }
 
+.poll button {
+    height: fit-content;
+    width: fit-content;
+    background: #04395E;
+    cursor: pointer;
+    color: white;
 
+    border: 0;
+
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 3%;
+    
+    padding: 2%;
+    
+    font-family: Inter;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+    @media only screen and (min-width: 768px) {
+        font-family: Inter;
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 27px;
+        letter-spacing: 0em;
+        text-align: left;
+        align-self: flex-start;
+
+    }
+}
+
+.poll button:hover {
+    background-color: #025f8e;
+    color: #fff;
+}
 
 
 .footer {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Popup from 'reactjs-popup';
 
 const Login = () => {
@@ -23,6 +23,9 @@ const Login = () => {
     const [password, setPassword] = useState()
     const [errorMessage, setErrorMessage] = useState()
 
+    const mainRef = useRef(null);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleSubmit = async (event) => {
         event.preventDefault()
         await fetch("http://localhost:5000/login", {
@@ -49,11 +52,30 @@ const Login = () => {
         })
     }
 
+    useEffect (() => {
+        const handleKeyPress = (event) => {
+            if (event.keyCode === 13) {
+                handleSubmit(event);
+            }
+        };
+
+        const inputField = mainRef.current;
+        if (inputField) {
+            inputField.addEventListener('keypress', handleKeyPress);
+        }
+
+        return () => {
+            if (inputField) {
+                inputField.removeEventListener('keypress', handleKeyPress);
+            }
+        };
+    }, [handleSubmit])
+
     return (
         <>
         <Popup 
             trigger={
-                <button>
+                <button className='menu-button'>
                     Login
                 </button>}
             onOpen={handleBlurr}
@@ -62,7 +84,7 @@ const Login = () => {
             nested
         >
             <h1>Login</h1>
-            <form>
+            <form ref={mainRef}>
                 <label htmlFor='email'></label>
                 <input
                     type="text"

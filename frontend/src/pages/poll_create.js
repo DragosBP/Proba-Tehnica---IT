@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Popup from 'reactjs-popup'
 import '../styles.css'
 
-const CreatePoll = () => {
+const CreatePoll = (props) => {
     const [blurr, setBlurr] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -13,6 +13,8 @@ const CreatePoll = () => {
             document.getElementById('main').style.filter = 'blur(0px)'
     }, [blurr])
     
+    const mainRef = useRef(null);
+
     const handleBlurr = () => {
         setBlurr(!blurr)
         setOpen(!open)
@@ -23,6 +25,7 @@ const CreatePoll = () => {
     const [errorMessage, setErrorMessage] = useState()
     const [answers, setAnswers] = useState(["","",""])
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleSubmit = async (event) => {
         event.preventDefault()
         await fetch("http://localhost:5000/polls/create", {
@@ -39,14 +42,37 @@ const CreatePoll = () => {
             })
         })
         .then((response) => {
-            //TODO: atauga logica pentru cand expira un token
             if (response.status === 402) {
                 setErrorMessage("Title cannot be empty!")
             }
-            if (response.status === 200)
-                setErrorMessage("Poll created with succes")
+            if (response.status === 200) {
+                props.handleGetPolls()
+                setErrorMessage("Poll created with success")
+            }
+            if (response.status === 498) {
+                setErrorMessage("Your session has expired. Please relog in before you create a poll.")
+            }
         })
     }
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.keyCode === 13) {
+                handleSubmit(event);
+            }
+        };
+
+        const inputField = mainRef.current;
+        if (inputField) {
+            inputField.addEventListener('keypress', handleKeyPress);
+        }
+
+        return () => {
+            if (inputField) {
+                inputField.addEventListener('keypress', handleKeyPress);
+            }
+        };
+    }, [handleSubmit]);
 
     const addAnswer = () => {
         setAnswers([...answers, ""]);
@@ -55,10 +81,10 @@ const CreatePoll = () => {
     const removeAnswer = (index) => {
         if (answers.length > 3) {
           let copy = [...answers];
-          copy.splice(index, 1); // Remove 1 element at the specified index
+          copy.splice(index, 1);
           setAnswers(copy);
         } else {
-          setErrorMessage("You can't have less than 3 answers."); // Set a default error message if none exists
+          setErrorMessage("You can't have less than 3 answers.");
         }
       };
 
@@ -82,7 +108,7 @@ const CreatePoll = () => {
             <h1>
                 Create a Poll
             </h1>
-            <form>
+            <form ref={mainRef}>
                 <div>
                     <label>Title<br></br>
                         <input
@@ -120,6 +146,9 @@ const CreatePoll = () => {
                         </label>
                     </label>
                 </div>
+                <h4>
+                    Answer Options
+                </h4>
                 <p>
                     {answers.map((answer, index) => (
                         <div key={index}>
@@ -134,7 +163,7 @@ const CreatePoll = () => {
                                 }}
                                 placeholder={"Option " + (index + 1)}
                             />
-                            <button onClick={() => removeAnswer(index)} type='button'>X</button>
+                            <button onClick={() => removeAnswer(index)} type='button'><div>X</div></button>
                         </div>
                     ))}
                     <button onClick={addAnswer} type='button'> {/*TODO Trebuie svhimbat si asta */}

@@ -79,4 +79,21 @@ async function getPolls() {
     return allPolls;
 }
 
-module.exports = {saveUser, findUserByEmail, saveSession, addPoll, getPolls}
+async function deletePoll(pollId) {
+    const poll = await Poll.findById(pollId);
+    const owner = poll.owner
+    
+    await User.updateOne(
+        { _id: owner },
+        { $pull: { polls: pollId } }
+    )
+
+    const deletedPoll = await Poll.findByIdAndDelete(pollId);
+    if (deletedPoll) {
+        console.log(`Poll ${pollId} deleted`)
+    } else {
+        console.log(`Poll not found: ${pollId}`)
+    }
+}
+
+module.exports = {saveUser, findUserByEmail, saveSession, addPoll, getPolls, deletePoll}

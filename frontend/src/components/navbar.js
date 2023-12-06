@@ -47,7 +47,9 @@ const Navbar = (props) => {
                         <ul>
                             {props.loaded ? (
                                 <>
-                                    {!props.logged ? <NavbarNoUser /> : <NavbarLoggedUser />}
+                                    {!props.logged ? <NavbarNoUser /> : <NavbarLoggedUser 
+                                                                            handleGetPolls={props.handleGetPolls}
+                                                                        />}
                                 </>
                             ) : (
                                 <h1>Loading</h1>
@@ -56,9 +58,15 @@ const Navbar = (props) => {
                     )}
                 </nav>
             </div>
-            {showMenu && hamburger && (
-                <div className="dropdown-menu">
-                    {!props.logged ? <NavbarNoUser /> : <NavbarLoggedUser />}
+            {hamburger && (
+                <div className='menu-space'>
+                    {showMenu &&  (
+                    <div>
+                        {!props.logged ? <NavbarNoUser /> : <NavbarLoggedUser 
+                                                                handleGetPolls={props.handleGetPolls}
+                                                            />}
+                    </div>
+                    )}
                 </div>
             )}
         </>

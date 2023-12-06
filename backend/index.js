@@ -66,10 +66,15 @@ app.get('/polls', (req, res) => {
     }
 })
 
+
+
+
 //Verifica emailul si parola dava sunt valide, daca nu sunt, trimtie un (400), altfel creeaza noul user
 app.post('/register', [
     check('email')
     .isEmail()
+    .withMessage("Please enter a valid email address")
+    .contains('@gmail.com')
     .withMessage("Please enter a valid email address")
     .custom(async value => {
         const user = await database.findUserByEmail(value)
@@ -98,7 +103,7 @@ app.post('/register', [
         let password = await bcrypt.hash(req.body.password, 10)
         database.saveUser(email, password)
             .then((newUser) => {
-                res.status(200).send("Account created with succes!") //TODO Trebuie sters "newUser" mai tarziu
+                res.status(200).send("Account created with successs!") //TODO Trebuie sters "newUser" mai tarziu
             })
     } catch (error) {
         res.status(500).send("Error saving user: " + error.message)
@@ -144,6 +149,8 @@ app.post('/logout', (req, res) => {
     res.status(200).send("USE LOGGED OUT")
 })
 
+
+
 app.post('/polls/create', [
     authentificateToken,
     check('title')
@@ -162,13 +169,26 @@ app.post('/polls/create', [
         let answers = req.body.answers
         database.addPoll(userId, title, isMultipleChoice, numberOfAnswers, answers)
             .then((newPoll) => { 
-                res.status(200).send("Poll created with succes")
+                res.status(200).send("Poll created with successs")
             })
         
     } catch (error) {
         res.status(500).send("Error finding user: " + error.message)
     }
 })
+
+app.delete('/polls/delete' , authentificateToken, (req, res) => {
+    try {
+        const pollId = req.body.pollId
+        database.deletePoll(pollId)
+            .then(() => {
+                res.status(200).send("Poll deleted with successs")
+            })
+    } catch (error) {
+        res.status(500).send("Error finding user: " + error.message)
+    }
+})
+
 
 app.listen(5000, () => {
     console.log(("Server Started on port 5000"));
