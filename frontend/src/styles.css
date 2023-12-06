@@ -91,6 +91,7 @@ body {
 .navbar nav li {
     display: block;
     margin: 0 auto;
+    margin-right: 2%;
 }
 
 .navbar nav li button {
@@ -104,7 +105,11 @@ body {
     cursor: pointer;
     font-size: 2.3rem;
     height: 100%;
-    white-space: nowrap
+    white-space: nowrap;
+
+    @media only screen and (min-width: 768px) {
+        border-radius: 0;
+    }
 }
 
 .navbar nav li button:hover {
@@ -878,6 +883,16 @@ body {
     }
 }
 
+.poll div.poll-input p input.voted[type='radio'] {
+    border: 1px solid #7E7E7E;
+
+    @media only screen and (min-width: 768px) {
+        padding: 0.5rem;
+        border: 3px solid #7E7E7E;
+    }
+}
+
+
 .poll div.poll-input p input[type='checkbox'] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -896,6 +911,35 @@ body {
         padding: 0.5rem;
         border: 3px solid #04395E;
     }
+}
+
+.poll div.poll-input p input.voted[type='checkbox'] {
+    border: 1px solid #7E7E7E;
+
+    @media only screen and (min-width: 768px) {
+        padding: 0.5rem;
+        border: 3px solid #7E7E7E;
+    }
+}
+
+
+
+
+.poll div.poll-input p input[type='checkbox']:checked {
+    background: #04395E;
+}
+
+.poll div.poll-input p input.voted[type='checkbox']:checked {
+    background: #7E7E7E;
+}
+
+
+.poll div.poll-input p input[type='radio']:checked {
+    background: #04395E;
+}
+
+.poll div.poll-input p input.voted[type='radio']:checked {
+    background: #7E7E7E;
 }
 
 .poll div.poll-error {

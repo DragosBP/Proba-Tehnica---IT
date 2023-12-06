@@ -16,7 +16,6 @@ const PollTheUser = (props) => {
         })
         .then((response) => {
             if (response.status === 200) {
-                setErrorMessage("Poll deleted with success")
                 props.handleGetPolls()
             }
             if (response.status === 498) {
@@ -38,6 +37,7 @@ const PollTheUser = (props) => {
                                     <input
                                         type="radio"
                                         value={answer.name}
+                                        checked={false}
                                         onClick={()=>{setErrorMessage("You cannot vote on your own poll!")}}
                                     />
                                     <label type='radio'>{answer.name}</label>
@@ -56,6 +56,7 @@ const PollTheUser = (props) => {
                                 <input
                                     type="checkbox"
                                     value={answer.name}
+                                    checked={false}
                                     onClick={()=>{setErrorMessage("You cannot vote on your own poll!")}}
                                 />
                                 <label type="checkbox">{answer.name}</label>

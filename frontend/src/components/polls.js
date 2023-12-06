@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import PollNoUser from '../pages/poll_noUser'
 import PollTheUser from "../pages/poll_theUser";
+import PollVoterUser from "../pages/poll_voterUser";
 import "../styles.css"
 
 const Polls = (props) => {
 
     const [isOwner, setIsOwner] = useState(false)
-    const [hasVoted, setHasVoted] = useState(false)
+    
 
     const handleOwner = async () => {
         if (props.userId === props.ownerId) {
@@ -16,17 +17,11 @@ const Polls = (props) => {
         }
     }
 
-    const handleVoter = async () => {
-        if (props.usersThatVoted.some(user => user.userId.toString() === props.userId.toString())) {
-            setHasVoted(true);
-          } else {
-            setHasVoted(false);
-          }
-    }
+    
 
     useEffect(() => {
         handleOwner()
-        handleVoter()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -47,15 +42,16 @@ const Polls = (props) => {
                             </>
                         ) : (
                             <>
-                                {hasVoted ? (
-                                    <>
-                                        <h1>Am si votat</h1>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h1>Dar nu am votat</h1>
-                                    </>
-                                )}
+                                <PollVoterUser
+                                    title={props.title}
+                                    isMultiple={props.isMultiple}
+                                    answers={props.answers}
+                                    userId={props.userId}
+                                    pollId={props.pollId}
+                                    handleGetPolls={props.handleGetPolls}
+                                    numberOfAnswers={props.numberOfAnswers}
+                                    usersThatVoted={props.usersThatVoted}
+                                />
                             </>
                         )}
                     </>

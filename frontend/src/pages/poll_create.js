@@ -166,7 +166,7 @@ const CreatePoll = (props) => {
                             <button onClick={() => removeAnswer(index)} type='button'><div>X</div></button>
                         </div>
                     ))}
-                    <button onClick={addAnswer} type='button'> {/*TODO Trebuie svhimbat si asta */}
+                    <button onClick={addAnswer} type='button'>
                         +Add option
                     </button>
                 </p>

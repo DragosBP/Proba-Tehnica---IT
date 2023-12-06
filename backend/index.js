@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken")
 
 const app = express();
 
-//TODO Adauga mai multa logica de verificare a userului, in caz ca a stat de ceva timp pe site
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -96,14 +95,14 @@ app.post('/register', [
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const errArray = errors.array()
-            res.status(200) //TODO Vezi exact ce status ar trebui trimis aici
+            res.status(200)
             return res.send(errArray[0].msg)
         }
         let email = req.body.email
         let password = await bcrypt.hash(req.body.password, 10)
         database.saveUser(email, password)
-            .then((newUser) => {
-                res.status(200).send("Account created with successs!") //TODO Trebuie sters "newUser" mai tarziu
+            .then(() => {
+                res.status(200).send("Account created with successs!")
             })
     } catch (error) {
         res.status(500).send("Error saving user: " + error.message)
@@ -130,7 +129,7 @@ app.post('/login', [
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(200).send(errors.array()[0].msg) //TODO Cauta statusul exact
+            return res.status(200).send(errors.array()[0].msg)
         }
         database.findUserByEmail(req.body.email)
             .then((user) => {
@@ -189,6 +188,51 @@ app.delete('/polls/delete' , authentificateToken, (req, res) => {
     }
 })
 
+app.put('/polls/votes', authentificateToken, (req, res) => {
+    try {
+        const pollId = req.body.pollId
+        const votes = req.body.votes
+        const userId = req.userId.userId
+
+        const truePositions = [];
+        votes.forEach((vote, index) => {
+            if (vote === true) {
+                truePositions.push(index);
+            }
+        })
+
+        database.postVotes(pollId, userId, truePositions)
+            .then(() => {
+                res.status(200).send("Poll saved successfully")
+            })
+
+    } catch (error) {
+        res.status(500).send("Error voting: " + error.message)
+    }
+})
+
+app.delete('/polls/votes', authentificateToken, (req, res) => {
+    try {
+        const pollId = req.body.pollId
+        const userId = req.userId.userId
+        const votes = req.body.votes
+
+        const truePositions = [];
+        votes.forEach((vote, index) => {
+            if (vote === true) {
+                truePositions.push(index);
+            }
+        })
+
+        database.deleteVote(pollId, userId, truePositions)
+            .then(() => {
+                res.status(200).send("Vote removed successfully")
+            })
+        
+    } catch (error) {
+        res.status(500).send("Error deleting vote: " + error.message)
+    }
+})
 
 app.listen(5000, () => {
     console.log(("Server Started on port 5000"));

@@ -18,11 +18,11 @@ async function saveUser(userEmail, userPassword) {
         password: userPassword,
     })
     .then((newUser) => {
-        console.log("New User: ", newUser)
+        // console.log("New User: ", newUser)
         return newUser.toJSON()
     })
     .catch((error) => {
-        console.error("Error saving user: ", error)
+        // console.error("Error saving user: ", error)
         throw error
     })
 }
@@ -33,9 +33,9 @@ async function findUserByEmail(userEmail) {
     })
         .then((user) => {
             if (user != null) {
-                console.log("User found by email: ", user)
+                // console.log("User found by email: ", user)
             } else {
-                console.log("User not found by email")
+                // console.log("User not found by email")
             }
             return user
         })
@@ -65,7 +65,7 @@ async function addPoll(userId, title, isMultiple, numberOfAnswers, answersWithou
         answers: answersWithVotes
     })
     .then((newPoll) => {
-        console.log("New Poll: ", newPoll)
+        // console.log("New Poll: ", newPoll)
         return newPoll.toJSON()
     })
     .catch((error) => {
@@ -96,4 +96,46 @@ async function deletePoll(pollId) {
     }
 }
 
-module.exports = {saveUser, findUserByEmail, saveSession, addPoll, getPolls, deletePoll}
+async function getVotes(pollId, userId) {
+    return Poll.findById(pollId)
+    .then((poll) => {
+
+        const userVote = poll.usersThatVoted.find(vote => vote.userId.toString() === userId.toString());
+        return userVote;
+    })
+
+}
+
+async function postVotes(pollId, userId, votes) {
+    const poll = await Poll.findById(pollId);
+
+    const userVote = {
+        userId: userId,
+        answers: votes,
+    }
+
+    votes.forEach(index => {
+        poll.answers[index].numberOfVotes++;
+    });
+
+    poll.usersThatVoted.push(userVote)
+    await poll.save()
+    // console.log("vote saved: " + {userVote})
+}
+
+async function deleteVote(pollId, userId, votes) {
+    const poll = await Poll.findById(pollId);
+
+    votes.forEach(index => {
+        poll.answers[index].numberOfVotes--;
+    });
+
+    const userVoteIndex = poll.usersThatVoted.findIndex(
+        (vote) => vote.userId.toString() === userId.toString()
+    )
+
+    poll.usersThatVoted.splice(userVoteIndex, 1);
+    await poll.save();
+}
+
+module.exports = {saveUser, findUserByEmail, saveSession, addPoll, getPolls, deletePoll, getVotes, postVotes, deleteVote}

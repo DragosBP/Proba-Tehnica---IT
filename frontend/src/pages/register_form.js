@@ -41,7 +41,7 @@ const Register = () => {
         })
         .then((response) => response.text())
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             const containsEmail = JSON.stringify(data).toLowerCase().includes('email')
             const containsPassword = JSON.stringify(data).toLowerCase().includes('password')
             if (containsEmail) {
@@ -78,11 +78,6 @@ const Register = () => {
             });
         };
     }, [handleSubmit]);
-
-    // const ClosePopup = () => {
-
-    // }
-    //TODO Adauga buton de inchidere
 
  return (
         <>

@@ -5,6 +5,8 @@ const { exit } = require("process");
 
 Mongoose.connect("mongodb://localhost/database").then(console.log("Database started succesfully"))
 
+//A fost penttru testare
+
 const db = Mongoose.connection;
 
 db.dropDatabase()
